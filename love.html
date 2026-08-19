@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #ff4d6d, #590d22, #17000a);
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .heart {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            background: #ff1744;
+            transform: rotate(-45deg);
+            margin: 0 auto 50px;
+            animation: heartbeat 1s infinite;
+            box-shadow: 0 0 30px #ff1744, 0 0 60px #ff1744, 0 0 100px rgba(255, 23, 68, 0.7);
+        }
+        
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: #ff1744;
+            border-radius: 50%;
+        }
+        
+        .heart::before {
+            top: -65px;
+            left: 0;
+        }
+        
+        .heart::after {
+            top: 0;
+            left: 65px;
+        }
+        
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: rotate(-45deg) scale(1);
+            }
+            25% {
+                transform: rotate(-45deg) scale(1.15);
+            }
+            40% {
+                transform: rotate(-45deg) scale(1);
+            }
+            60% {
+                transform: rotate(-45deg) scale(1.18);
+            }
+        }
+        
+        h1 {
+            color: white;
+            font-size: clamp(45px, 10vw, 90px);
+            text-shadow: 0 0 10px #fff, 0 0 20px #ff1744, 0 0 40px #ff1744;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px white, 0 0 20px #ff1744;
+            }
+            to {
+                text-shadow: 0 0 20px white, 0 0 40px #ff1744, 0 0 70px #ff1744;
+            }
+        }
+        
+        .subtitle {
+            color: #ffe5ec;
+            margin-top: 20px;
+            font-size: 20px;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            color: #ffb3c1;
+            font-size: 25px;
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            filter: drop-shadow(0 0 8px #ff1744);
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.5) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: sparkle 2s infinite;
+        }
+        
+        @keyframes sparkle {
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+        
+        button {
+            margin-top: 30px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            background: white;
+            color: #e91e63;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 255, 255, .5);
+            transition: .3s;
+        }
+        
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="heart"></div>
+
+        <h1>I Love You ❤️</h1>
+
+        <p class="subtitle">
+            You are the most beautiful part of my world ✨
+        </p>
+
+        <button onclick="loveExplosion()">
+      Click Me ❤️
+    </button>
+
+    </div>
+
+    <script>
+        // Create floating hearts continuously
+        function createHeart() {
+            const heart = document.createElement("div");
+
+            heart.className = "floating-heart";
+            heart.innerHTML = ["❤️", "💕", "💖", "💗", "💓"][Math.floor(Math.random() * 5)];
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (15 + Math.random() * 35) + "px";
+            heart.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 9000);
+        }
+
+        setInterval(createHeart, 300);
+
+
+        // Create background sparkles
+        function createSparkle() {
+            const sparkle = document.createElement("div");
+
+            sparkle.className = "sparkle";
+
+            sparkle.style.left = Math.random() * 100 + "vw";
+            sparkle.style.top = Math.random() * 100 + "vh";
+            sparkle.style.animationDelay = Math.random() * 2 + "s";
+
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+
+        setInterval(createSparkle, 200);
+
+
+        // Big heart explosion when button is clicked
+        function loveExplosion() {
+
+            for (let i = 0; i < 50; i++) {
+
+                const heart = document.createElement("div");
+
+                heart.innerHTML = "❤️";
+                heart.style.position = "fixed";
+                heart.style.left = "50%";
+                heart.style.top = "50%";
+                heart.style.fontSize = (15 + Math.random() * 35) + "px";
+                heart.style.pointerEvents = "none";
+                heart.style.zIndex = "100";
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 100 + Math.random() * 400;
+
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+
+                heart.animate(
+                    [{
+                        transform: "translate(-50%, -50%) scale(0)",
+                        opacity: 1
+                    }, {
+                        transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1.5)`,
+                        opacity: 0
+                    }], {
+                        duration: 1200 + Math.random() * 1000,
+                        easing: "cubic-bezier(.17,.67,.83,.67)"
+                    }
+                );
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 2500);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
