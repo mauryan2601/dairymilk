@@ -1,0 +1,442 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DairyMilk 💜</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background: #12001f;
+            color: white;
+            overflow-x: hidden;
+        }
+        /* Animated background */
+        
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, #8e44ad55, transparent 30%), radial-gradient(circle at 80% 70%, #c084fc44, transparent 30%), radial-gradient(circle at 50% 50%, #5b21b655, transparent 35%);
+            animation: backgroundMove 8s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+        
+        @keyframes backgroundMove {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.25);
+            }
+        }
+        /* Floating hearts */
+        
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            color: #e879f9;
+            font-size: 25px;
+            pointer-events: none;
+            animation: floatHeart linear forwards;
+            z-index: 10;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        /* Hero */
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            animation: appear 1.5s ease;
+        }
+        
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .small-text {
+            color: #d8b4fe;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        
+        h1 {
+            font-size: clamp(60px, 13vw, 140px);
+            margin: 10px 0;
+            background: linear-gradient(90deg, #c084fc, #f0abfc, #fff);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 10px #c084fc);
+            }
+            to {
+                filter: drop-shadow(0 0 35px #e879f9);
+            }
+        }
+        
+        .typing {
+            font-size: clamp(22px, 4vw, 38px);
+            min-height: 50px;
+            color: #f5d0fe;
+        }
+        
+        .heart-main {
+            font-size: 80px;
+            margin: 20px;
+            animation: heartbeat 1.2s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.25);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.15);
+            }
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 35px;
+            border-radius: 50px;
+            border: 1px solid #e879f9;
+            background: #a855f733;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 17px;
+            transition: .3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            background: #d946ef;
+            box-shadow: 0 0 30px #d946ef;
+            transform: translateY(-4px);
+        }
+        /* Sections */
+        
+        section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: clamp(35px, 6vw, 60px);
+            margin-bottom: 50px;
+            color: #e9d5ff;
+        }
+        /* Love card */
+        
+        .love-card {
+            max-width: 700px;
+            margin: auto;
+            padding: 50px 35px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .15);
+            box-shadow: 0 20px 80px #0005;
+            backdrop-filter: blur(15px);
+            transition: .5s;
+        }
+        
+        .love-card:hover {
+            transform: translateY(-10px) rotateX(3deg);
+            box-shadow: 0 30px 100px #c026d355;
+        }
+        
+        .love-card p {
+            font-size: 25px;
+            line-height: 1.8;
+            color: #f5d0fe;
+        }
+        /* Memories */
+        
+        .memories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            max-width: 1000px;
+            margin: auto;
+            gap: 25px;
+        }
+        
+        .memory {
+            height: 250px;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #581c87, #a21caf);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            padding: 20px;
+            transition: .4s;
+            border: 1px solid #ffffff22;
+        }
+        
+        .memory:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 50px #d946ef55;
+        }
+        /* Surprise */
+        
+        #surprise {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #secret {
+            max-width: 700px;
+            margin-top: 30px;
+            font-size: clamp(25px, 5vw, 50px);
+            color: #f0abfc;
+            opacity: 0;
+            transform: scale(.5);
+            transition: 1s;
+        }
+        
+        #secret.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        footer {
+            padding: 30px;
+            text-align: center;
+            color: #c4b5fd;
+            border-top: 1px solid #ffffff15;
+        }
+        /* Mobile */
+        
+        @media (max-width: 600px) {
+            section {
+                padding: 70px 15px;
+            }
+            .love-card {
+                padding: 35px 20px;
+            }
+            .love-card p {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="small-text">A little website made with love</div>
+
+            <h1>DairyMilk</h1>
+
+            <div class="heart-main">💜</div>
+
+            <div class="typing" id="typing"></div>
+
+            <a href="#letter" class="btn">Open My Heart 💌</a>
+        </div>
+    </section>
+
+
+    <!-- LOVE LETTER -->
+    <section id="letter">
+        <h2 class="section-title">For You 💜</h2>
+
+        <div class="love-card">
+            <p>
+                DairyMilk,
+                <br><br> I just want you to know something very simple...
+                <br><br>
+
+                <strong>I LOVE YOU ❤️</strong>
+
+                <br><br> No complicated words. No big explanation. Just three little words that mean everything to me.
+                <br><br> You are special to me, and I hope this little website makes you smile. 💜
+            </p>
+        </div>
+    </section>
+
+
+    <!-- MEMORIES -->
+    <section>
+        <h2 class="section-title">Little Things I Love ✨</h2>
+
+        <div class="memories">
+            <div class="memory">Your Smile 😊</div>
+            <div class="memory">Your Laugh 💕</div>
+            <div class="memory">Talking With You 🌙</div>
+            <div class="memory">Being With You 🫶</div>
+        </div>
+    </section>
+
+
+    <!-- SURPRISE -->
+    <section id="surprise">
+        <h2 class="section-title">One Last Thing...</h2>
+
+        <button class="btn" onclick="showLove()">
+      Click For A Surprise 💝
+    </button>
+
+        <div id="secret">
+            DairyMilk, <br>
+            <strong>I LOVE YOU ❤️</strong>
+            <br> Forever & Always ✨
+        </div>
+    </section>
+
+
+    <footer>
+        Made with ❤️ especially for DairyMilk
+    </footer>
+
+
+    <script>
+        /* Typing animation */
+        const text = "DairyMilk, I love you ❤️";
+        const typing = document.getElementById("typing");
+
+        let index = 0;
+
+        function typeText() {
+            if (index < text.length) {
+                typing.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeText, 100);
+            }
+        }
+
+        typeText();
+
+
+        /* Floating hearts */
+        function createHeart() {
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+            heart.innerHTML = ["💜", "💖", "💕", "✨", "❤️"][
+                Math.floor(Math.random() * 5)
+            ];
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (15 + Math.random() * 30) + "px";
+            heart.style.animationDuration = (5 + Math.random() * 7) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 12000);
+        }
+
+        setInterval(createHeart, 500);
+
+
+        /* Surprise button */
+        function showLove() {
+            const secret = document.getElementById("secret");
+
+            secret.classList.add("show");
+
+            // Heart explosion
+            for (let i = 0; i < 40; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+
+
+        /* Mouse sparkle effect */
+        document.addEventListener("mousemove", (e) => {
+            if (Math.random() > 0.85) {
+                const sparkle = document.createElement("div");
+
+                sparkle.innerHTML = "✨";
+                sparkle.style.position = "fixed";
+                sparkle.style.left = e.clientX + "px";
+                sparkle.style.top = e.clientY + "px";
+                sparkle.style.pointerEvents = "none";
+                sparkle.style.fontSize = "12px";
+                sparkle.style.zIndex = "999";
+
+                document.body.appendChild(sparkle);
+
+                sparkle.animate(
+                    [{
+                        transform: "translateY(0) scale(1)",
+                        opacity: 1
+                    }, {
+                        transform: "translateY(-30px) scale(0)",
+                        opacity: 0
+                    }], {
+                        duration: 700
+                    }
+                );
+
+                setTimeout(() => sparkle.remove(), 700);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+```
